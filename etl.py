@@ -173,7 +173,8 @@ def process_log_data(spark, input_data, output_data):
     )
 
     # write songplays table to parquet files partitioned by year and month
-    songplays_table.write.parquet(output_data + "songplays/", mode="overwrite") 
+    songplays_table.write.partitionBy('year','month').parquet(output_data + "songplays/", mode="overwrite") 
+
 
 def main():
     spark = create_spark_session()
